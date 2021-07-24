@@ -13,10 +13,12 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: MyTheme.creamColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -25,11 +27,11 @@ class HomeDetailPage extends StatelessWidget {
             ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(MyTheme.darkBluishColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            context.theme.buttonColor),
                         shape: MaterialStateProperty.all(StadiumBorder())),
-                    child: "Buy".text.make())
-                .wh(100, 50)
+                    child: "Add to cart".text.make())
+                .wh(120, 50)
           ],
         ).p32(),
       ),
@@ -40,7 +42,7 @@ class HomeDetailPage extends StatelessWidget {
             Hero(
                     tag: Key(catalog.id.toString()),
                     child: Image.network(catalog.image))
-                .h32(context)
+                .h24(context)
                 .p32(),
             Expanded(
                 child: VxArc(
@@ -48,16 +50,21 @@ class HomeDetailPage extends StatelessWidget {
               arcType: VxArcType.CONVEY,
               edge: VxEdge.TOP,
               child: Container(
-                color: Colors.white,
+                color: context.cardColor,
                 width: context.screenWidth,
                 child: Column(
                   children: [
                     catalog.name.text.xl4
-                        .color(MyTheme.darkBluishColor)
+                        .color(context.accentColor)
                         .xl
                         .bold
                         .make(),
                     catalog.desc.text.make(),
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                        .text
+                        .sm
+                        .make()
+                        .p16(),
                   ],
                 ).py64(),
               ),
